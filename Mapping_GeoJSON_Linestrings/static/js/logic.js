@@ -24,9 +24,6 @@ let sanFranAirport =
 // Create the map object with center at the San Francisco airport.
 //let map = L.map('mapid').setView([37.5, -122.5], 10);
 
-// Create the map object with center and zoom level.
-let map = L.map('mapid').setView([44.0, -80.0], 2);
-
 // Grabbing our GeoJSON data.
 L.geoJSON(sanFranAirport, {
   onEachFeature: function(feature, layer) {
@@ -39,7 +36,7 @@ L.geoJSON(sanFranAirport, {
 let light = L.tileLayer('https://api.mapbox.com/styles/light-v10/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
-    accessToken: API_KEY
+    accessToken: API_Key
 });
 
 // Then we add our 'streets' tile layer to the map.
@@ -49,7 +46,7 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 let dark = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
-    accessToken: API_KEY
+    accessToken: API_Key
 });
 
 // Create a base layer that holds both maps.
