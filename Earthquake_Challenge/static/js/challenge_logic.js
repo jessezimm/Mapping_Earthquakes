@@ -5,14 +5,14 @@ console.log("working");
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
 	maxZoom: 18,
-	accessToken: API_KEY
+	accessToken: API_Key
 });
 
 // We create the second tile layer that will be the background of our map.
 let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
 	maxZoom: 18,
-	accessToken: API_KEY
+	accessToken: API_Key
 });
 
 // Create the map object with center, zoom level and default layer.
@@ -35,9 +35,7 @@ let tetonicPlates = new L.LayerGroup();
 
 // 2. Add a reference to the tectonic plates group to the overlays object.
 let overlays = {
-  "Earthquakes": allEarthquakes
-};
-let overlays = {
+  "Earthquakes": allEarthquakes,
   "Tetonic Plates" : tetonicPlates
 };
 
@@ -110,7 +108,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 
   // Then we add the earthquake layer to our map.
   allEarthquakes.addTo(map);
-
+});
   // Here we create a legend control object.
 let legend = L.control({
   position: "bottomright"
@@ -145,18 +143,18 @@ legend.onAdd = function() {
 
 
   // 3. Use d3.json to make a call to get our Tectonic Plate geoJSON data.
-  d3.json("https://github.com/fraxen/tectonicplates/blob/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
+  d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
 
     // This function returns the style of tetonic plate data.
-    function styleInfo(feature) {
+    function styleInfo(geometry) {
       return {
         opacity: 1,
         fillOpacity: 1,
-        fillColor: getColor(feature.properties.mag),
+        fillColor: getColor(geometry.linestring.coordinates),
         color: "#000000",
-        radius: getRadius(feature.properties.mag),
+        radius: getRadius(geometry.linestring.coordinatese),
         stroke: true,
-        weight: 0.5
+        weight: 5
       };
     }
   // Creating a GeoJSON layer with the retrieved data.
@@ -166,3 +164,4 @@ legend.onAdd = function() {
 
   // Then we add the tetonic plate data to our map.
   tetonicPlates.addTo(map);
+});
